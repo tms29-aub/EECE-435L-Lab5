@@ -9,7 +9,8 @@ def create_db_table():
         conn = connect_to_db() 
         conn.execute('''
             CREATE TABLE users (
-            user_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL,
+            user_id INTEGER PRIMARY KEY NOT NULL, 
+            name TEXT NOT NULL,
             email TEXT NOT NULL,
             phone TEXT NOT NULL,
             address TEXT NOT NULL,
@@ -68,7 +69,8 @@ def get_users():
     
     except:
         users = []
-        return users
+    
+    return users
     
 
 def get_user_by_id(user_id):
@@ -111,14 +113,15 @@ def update_user(user):
         updated_user = {} 
     finally:
         conn.close() 
-        return updated_user
+    
+    return updated_user
     
 def delete_user(user_id): 
     message = {}
     try:
         conn = connect_to_db()
-        conn.execute("DELETE from users WHERE user_id = ?",
-        conn.commit() (user_id,))
+        conn.execute("DELETE from users WHERE user_id = ?", (user_id,))
+        conn.commit()
         message["status"] = "User deleted successfully" 
     
     except:
